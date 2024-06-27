@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ConfigService } from './config.service';
 import { CreateConfigDto } from './dto/create-config.dto';
 import { UpdateConfigDto } from './dto/update-config.dto';
+import { GetConfigDto } from './dto/get-config.dto';
+import { GetConfigByNameDto } from './dto/get-config-by-name.dto';
 
 @Controller('config')
 export class ConfigController {
@@ -18,8 +20,8 @@ export class ConfigController {
   }
 
   @Get(':serviceName')
-  findOne(@Param('serviceName') serviceName: string) {
-    return this.configService.findByServiceName(serviceName);
+  findOne(@Param('serviceName') serviceName: string, @Body() getConfigDto:GetConfigDto): Promise<GetConfigByNameDto> {
+    return this.configService.findByServiceName(serviceName, getConfigDto.secret);
   }
 
   @Patch(':id')

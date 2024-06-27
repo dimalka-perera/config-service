@@ -7,6 +7,10 @@ export const ConfigSchema=new mongoose.Schema({
         type: String,
         unique: true
     },
+    secret:{
+        required: false,
+        type: String
+    },
     config: Object,
     lastUpdatedBy: String,
 
